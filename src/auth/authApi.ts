@@ -1,6 +1,7 @@
 import type { AuthResponse, AuthUser, LoginRequest, RegisterRequest } from "../types/auth";
+import { API_BASE_URL } from "../services/apiClient";
 
-const API_BASE_URL = "http://localhost:8080";
+//const API_BASE_URL = "http://localhost:8080";
 const TOKEN_STORAGE_KEY = "ecorepair_auth_token";
 
 function extractToken(data: AuthResponse): string {
