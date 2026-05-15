@@ -5,6 +5,7 @@ export interface Device {
   brand: string;
   reusable: boolean;
   purchaseDate: string;
+  imageUrl?: string | null;
 }
 
 export interface DevicePayload {
