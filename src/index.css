@@ -441,6 +441,68 @@ h2 {
   color: #cbd5e1;
 }
 
+.dashboard-visual .primary-button,
+.dashboard-visual .secondary-button {
+  min-height: 46px;
+}
+
+.dashboard-visual .secondary-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #f8fafc;
+}
+
+.editor-dashboard-visual {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(125, 211, 252, 0.28), transparent 26%),
+    linear-gradient(135deg, #07110b, #1e3a5f 70%, #0f766e);
+}
+
+.admin-dashboard-visual {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(252, 211, 77, 0.25), transparent 26%),
+    linear-gradient(135deg, #07110b, #3b2f12 62%, #166534);
+}
+
+.dashboard-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.dashboard-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.05);
+}
+
+.dashboard-panel h3 {
+  margin-bottom: 14px;
+}
+
+.dashboard-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+}
+
+.dashboard-list li {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+
+.dashboard-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
 .progress-card {
   display: grid;
   justify-items: center;
@@ -640,7 +702,8 @@ tbody tr:hover {
   }
 }
   .auth-layout,
-  .dashboard-visual {
+  .dashboard-visual,
+  .dashboard-columns {
     grid-template-columns: 1fr;
   }
 
