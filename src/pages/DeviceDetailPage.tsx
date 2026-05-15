@@ -25,7 +25,7 @@ export default function DeviceDetailPage() {
   }, [id]);
 
   return (
-    <section className="page-card">
+    <section className="card card-body shadow-sm">
       <p className="eyebrow">Device profile</p>
       <h2>Device details</h2>
       <StatusMessage loading={loading} error={error} />
@@ -41,13 +41,13 @@ export default function DeviceDetailPage() {
           <dd>{device.purchaseDate}</dd>
           <dt>Status</dt>
           <dd>
-            <span className={`badge ${device.reusable ? "status-ok" : "status-pending"}`}>
+            <span className={`badge ${device.reusable ? "text-bg-success" : "text-bg-secondary"}`}>
               {device.reusable ? "Reusable" : "Single use"}
             </span>
           </dd>
         </dl>
       )}
-      <Link className="secondary-button" to="/devices">Back to devices</Link>
+      <Link className="btn btn-outline-dark fw-bold align-self-start" to="/devices">Back to devices</Link>
     </section>
   );
 }

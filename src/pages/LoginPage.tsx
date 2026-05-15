@@ -34,23 +34,25 @@ export default function LoginPage() {
   return (
     <section className="auth-layout">
       <AuthVisual />
-      <div className="auth-panel">
+      <div className="card auth-panel shadow-lg">
+        <div className="card-body p-4">
         <p className="eyebrow">Secure access</p>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit} className="stacked-form">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <h2 className="fw-bold">Login</h2>
+        <form onSubmit={handleSubmit} className="vstack gap-3 mt-3">
+          <label className="form-label fw-bold mb-0" htmlFor="email">Email</label>
+          <input className="form-control" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label className="form-label fw-bold mb-0" htmlFor="password">Password</label>
+          <input className="form-control" id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-          {error && <p className="error-text">{error}</p>}
+          {error && <p className="alert alert-danger fw-semibold mb-0">{error}</p>}
 
-          <button className="primary-button" type="submit" disabled={loading}>
+          <button className="btn btn-success fw-bold" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <p className="muted-text">No account yet? <Link to="/register">Register</Link></p>
+        <p className="text-secondary mt-3 mb-0">No account yet? <Link to="/register">Register</Link></p>
+        </div>
       </div>
     </section>
   );

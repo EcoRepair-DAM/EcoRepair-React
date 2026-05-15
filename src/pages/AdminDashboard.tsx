@@ -69,33 +69,37 @@ export default function AdminDashboard() {
             <div>
               <p className="eyebrow">Admin controls</p>
               <h3>Manage access and supervise operations</h3>
-              <p className="muted-text">Admins can review users, assign roles and keep the whole system aligned.</p>
+              <p className="text-secondary">Admins can review users, assign roles and keep the whole system aligned.</p>
             </div>
-            <Link className="primary-button" to="/admin">Manage users</Link>
-            <Link className="secondary-button" to="/repairs">Audit repairs</Link>
+            <Link className="btn btn-success fw-bold" to="/admin">Manage users</Link>
+            <Link className="btn btn-outline-light fw-bold" to="/repairs">Audit repairs</Link>
           </div>
 
           <div className="dashboard-columns">
-            <div className="dashboard-panel">
+            <div className="card shadow-sm">
+              <div className="card-body">
               <h3>Roles</h3>
-              <ul className="dashboard-list">
-                <li><span>Admins</span><strong>{roleTotals.admins}</strong></li>
-                <li><span>Editors</span><strong>{roleTotals.editors}</strong></li>
-                <li><span>Users</span><strong>{roleTotals.regularUsers}</strong></li>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between align-items-center px-0"><span>Admins</span><strong>{roleTotals.admins}</strong></li>
+                <li className="list-group-item d-flex justify-content-between align-items-center px-0"><span>Editors</span><strong>{roleTotals.editors}</strong></li>
+                <li className="list-group-item d-flex justify-content-between align-items-center px-0"><span>Users</span><strong>{roleTotals.regularUsers}</strong></li>
               </ul>
+              </div>
             </div>
 
-            <div className="dashboard-panel">
+            <div className="card shadow-sm">
+              <div className="card-body">
               <h3>Recent users</h3>
-              <ul className="dashboard-list">
+              <ul className="list-group list-group-flush">
                 {users.slice(0, 5).map((user) => (
-                  <li key={user.id}>
+                  <li className="list-group-item d-flex justify-content-between align-items-center px-0" key={user.id}>
                     <span>{user.email}</span>
-                    <span className="badge status-ok">{user.role}</span>
+                    <span className="badge text-bg-success">{user.role}</span>
                   </li>
                 ))}
-                {users.length === 0 && <li>No users found.</li>}
+                {users.length === 0 && <li className="list-group-item px-0">No users found.</li>}
               </ul>
+              </div>
             </div>
           </div>
         </>
@@ -106,9 +110,11 @@ export default function AdminDashboard() {
 
 function Summary({ label, value }: { label: string; value: number }) {
   return (
-    <div className="summary-item">
-      <span>{label}</span>
-      <strong>{value}</strong>
+    <div className="card summary-item shadow-sm">
+      <div className="card-body">
+        <span className="text-secondary fw-bold">{label}</span>
+        <strong>{value}</strong>
+      </div>
     </div>
   );
 }

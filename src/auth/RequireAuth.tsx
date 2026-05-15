@@ -7,7 +7,7 @@ export default function RequireAuth({ children }: { children: ReactNode }) {
   const location = useLocation();
 
   if (loadingSession) {
-    return <p className="status-text">Loading session...</p>;
+    return <p className="text-secondary fw-semibold">Loading session...</p>;
   }
 
   if (!token) {
