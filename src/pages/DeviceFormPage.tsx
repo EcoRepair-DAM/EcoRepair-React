@@ -16,6 +16,7 @@ const emptyDevice: DevicePayload = {
 export default function DeviceFormPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState<DevicePayload>(emptyDevice);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -25,7 +26,7 @@ export default function DeviceFormPage() {
     setError("");
 
     try {
-      const device = await createDevice(form);
+      const device = await createDevice(form, imageFile);
       navigate(`/devices/${device.id}`, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Device could not be created.");
@@ -61,6 +62,15 @@ export default function DeviceFormPage() {
           <div className="col-md-6">
             <label className="form-label fw-bold">Purchase date</label>
             <input className="form-control" type="date" value={form.purchaseDate} onChange={(e) => setForm({ ...form, purchaseDate: e.target.value })} required />
+          </div>
+          <div className="col-12">
+            <label className="form-label fw-bold">Image</label>
+            <input
+              accept="image/*"
+              className="form-control"
+              type="file"
+              onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            />
           </div>
         </div>
 

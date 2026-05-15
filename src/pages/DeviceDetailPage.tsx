@@ -8,6 +8,7 @@ import {
   updateDevice,
 } from "../services/devicesService";
 import type { Device, DevicePayload } from "../types/ecorepair";
+import { resolveImgUrl } from "../utils/resolveImgUrl";
 
 export default function DeviceDetailPage() {
   const { id } = useParams();
@@ -15,6 +16,7 @@ export default function DeviceDetailPage() {
   const { user } = useAuth();
   const [device, setDevice] = useState<Device | null>(null);
   const [form, setForm] = useState<DevicePayload | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -50,8 +52,9 @@ export default function DeviceDetailPage() {
     setError("");
 
     try {
-      const updatedDevice = await updateDevice(device.id, form);
+      const updatedDevice = await updateDevice(device.id, form, imageFile);
       setDevice(updatedDevice);
+      setImageFile(null);
       setForm({
         name: updatedDevice.name,
         type: updatedDevice.type,
@@ -85,6 +88,14 @@ export default function DeviceDetailPage() {
 
       {device && form && canManage && (
         <form onSubmit={handleSubmit}>
+          {resolveImgUrl(device.imageUrl) && (
+            <img
+              alt={device.name}
+              className="device-detail-image img-fluid rounded border mb-3"
+              src={resolveImgUrl(device.imageUrl)}
+            />
+          )}
+
           <div className="row g-3 mt-1">
             <div className="col-md-6">
               <label className="form-label fw-bold">Name</label>
@@ -101,6 +112,15 @@ export default function DeviceDetailPage() {
             <div className="col-md-6">
               <label className="form-label fw-bold">Purchase date</label>
               <input className="form-control" type="date" value={form.purchaseDate} onChange={(e) => setForm({ ...form, purchaseDate: e.target.value })} required />
+            </div>
+            <div className="col-12">
+              <label className="form-label fw-bold">Replace image</label>
+              <input
+                accept="image/*"
+                className="form-control"
+                type="file"
+                onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+              />
             </div>
           </div>
 
@@ -122,22 +142,31 @@ export default function DeviceDetailPage() {
       )}
 
       {device && !canManage && (
-        <dl className="detail-list">
-          <dt>Name</dt>
-          <dd>{device.name}</dd>
-          <dt>Brand</dt>
-          <dd>{device.brand}</dd>
-          <dt>Type</dt>
-          <dd>{device.type}</dd>
-          <dt>Purchase date</dt>
-          <dd>{device.purchaseDate}</dd>
-          <dt>Status</dt>
-          <dd>
-            <span className={`badge ${device.reusable ? "text-bg-success" : "text-bg-secondary"}`}>
-              {device.reusable ? "Reusable" : "Single use"}
-            </span>
-          </dd>
-        </dl>
+        <>
+          {resolveImgUrl(device.imageUrl) && (
+            <img
+              alt={device.name}
+              className="device-detail-image img-fluid rounded border mb-3"
+              src={resolveImgUrl(device.imageUrl)}
+            />
+          )}
+          <dl className="detail-list">
+            <dt>Name</dt>
+            <dd>{device.name}</dd>
+            <dt>Brand</dt>
+            <dd>{device.brand}</dd>
+            <dt>Type</dt>
+            <dd>{device.type}</dd>
+            <dt>Purchase date</dt>
+            <dd>{device.purchaseDate}</dd>
+            <dt>Status</dt>
+            <dd>
+              <span className={`badge ${device.reusable ? "text-bg-success" : "text-bg-secondary"}`}>
+                {device.reusable ? "Reusable" : "Single use"}
+              </span>
+            </dd>
+          </dl>
+        </>
       )}
       {device && !canManage && (
         <Link className="btn btn-outline-dark fw-bold align-self-start" to="/devices">Back to devices</Link>

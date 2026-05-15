@@ -4,7 +4,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:80
 
 interface RequestOptions {
   method?: string;
-  body?: unknown;
+  body?: FormData | unknown;
 }
 
 async function parseError(response: Response): Promise<string> {
@@ -25,13 +25,18 @@ export async function apiRequest<T>(
   options: RequestOptions = {},
 ): Promise<T> {
   const token = getToken();
+  const isFormData = options.body instanceof FormData;
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: options.method ?? "GET",
     headers: {
-      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...(options.body && !isFormData ? { "Content-Type": "application/json" } : {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: options.body
+      ? isFormData
+        ? options.body as FormData
+        : JSON.stringify(options.body)
+      : undefined,
   });
 
   if (response.status === 401) {

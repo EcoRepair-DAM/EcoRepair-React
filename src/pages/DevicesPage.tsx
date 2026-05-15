@@ -4,6 +4,7 @@ import { useAuth } from "../auth/authContext";
 import StatusMessage from "../components/StatusMessage";
 import { getDevices } from "../services/devicesService";
 import type { Device } from "../types/ecorepair";
+import { resolveImgUrl } from "../utils/resolveImgUrl";
 
 export default function DevicesPage() {
   const { user } = useAuth();
@@ -82,6 +83,7 @@ export default function DevicesPage() {
         <table className="table table-hover align-middle mb-0">
           <thead>
             <tr>
+              <th>Image</th>
               <th>Name</th>
               <th>Brand</th>
               <th>Type</th>
@@ -93,6 +95,17 @@ export default function DevicesPage() {
           <tbody>
             {filteredDevices.map((device) => (
               <tr key={device.id}>
+                <td>
+                  {resolveImgUrl(device.imageUrl) ? (
+                    <img
+                      alt={device.name}
+                      className="device-thumb rounded border"
+                      src={resolveImgUrl(device.imageUrl)}
+                    />
+                  ) : (
+                    <span className="text-secondary">No image</span>
+                  )}
+                </td>
                 <td>{device.name}</td>
                 <td>{device.brand}</td>
                 <td>{device.type}</td>
@@ -108,7 +121,7 @@ export default function DevicesPage() {
               </tr>
             ))}
             {filteredDevices.length === 0 && (
-              <tr><td colSpan={6}>No devices found.</td></tr>
+              <tr><td colSpan={7}>No devices found.</td></tr>
             )}
           </tbody>
         </table>
