@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authContext";
 
 export default function RequireAuth({ children }: { children: ReactNode }) {
   const { token, loadingSession } = useAuth();
