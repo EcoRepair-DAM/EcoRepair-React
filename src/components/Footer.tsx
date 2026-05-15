@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="app-footer">
-      <p>&copy; 2026 EcoRepair Management</p>
+    <footer className="border-top bg-white py-3 text-center text-secondary">
+      <p className="mb-0">&copy; 2026 EcoRepair Management</p>
     </footer>
   );
 }

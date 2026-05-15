@@ -67,18 +67,18 @@ export default function UserDashboard() {
             <div>
               <p className="eyebrow">Your access</p>
               <h3>Browse, inspect and request repairs</h3>
-              <p className="muted-text">User accounts can read the inventory and send repair requests for registered devices.</p>
+              <p className="text-secondary">User accounts can read the inventory and send repair requests for registered devices.</p>
             </div>
-            <Link className="primary-button" to="/devices">View devices</Link>
-            <Link className="secondary-button" to="/repairs">Request repair</Link>
+            <Link className="btn btn-success fw-bold" to="/devices">View devices</Link>
+            <Link className="btn btn-outline-light fw-bold" to="/repairs">Request repair</Link>
           </div>
 
           <div className="dashboard-columns">
             <DashboardList title="Latest devices">
               {latestDevices.map((device) => (
-                <li key={device.id}>
+                <li className="list-group-item d-flex justify-content-between align-items-center px-0" key={device.id}>
                   <span>{device.name}</span>
-                  <span className={`badge ${device.reusable ? "status-ok" : "status-pending"}`}>
+                  <span className={`badge ${device.reusable ? "text-bg-success" : "text-bg-secondary"}`}>
                     {device.reusable ? "Reusable" : "Single use"}
                   </span>
                 </li>
@@ -87,9 +87,9 @@ export default function UserDashboard() {
 
             <DashboardList title="Recent repairs">
               {latestRepairs.map((repair) => (
-                <li key={repair.id}>
+                <li className="list-group-item d-flex justify-content-between align-items-center px-0" key={repair.id}>
                   <span>{repair.description}</span>
-                  <span className={`badge ${repair.repair ? "status-ok" : "status-pending"}`}>
+                  <span className={`badge ${repair.repair ? "text-bg-success" : "text-bg-secondary"}`}>
                     {repair.repair ? "Finished" : "Pending"}
                   </span>
                 </li>
@@ -104,9 +104,11 @@ export default function UserDashboard() {
 
 function Summary({ label, value }: { label: string; value: number }) {
   return (
-    <div className="summary-item">
-      <span>{label}</span>
-      <strong>{value}</strong>
+    <div className="card summary-item shadow-sm">
+      <div className="card-body">
+        <span className="text-secondary fw-bold">{label}</span>
+        <strong>{value}</strong>
+      </div>
     </div>
   );
 }
@@ -119,9 +121,11 @@ function DashboardList({
   title: string;
 }) {
   return (
-    <div className="dashboard-panel">
+    <div className="card shadow-sm">
+      <div className="card-body">
       <h3>{title}</h3>
-      <ul className="dashboard-list">{children}</ul>
+      <ul className="list-group list-group-flush">{children}</ul>
+      </div>
     </div>
   );
 }

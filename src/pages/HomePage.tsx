@@ -13,13 +13,13 @@ export default function HomePage() {
           EcoRepair manages devices and repairs through a protected API with
           role-based access.
         </p>
-        <div className="button-row">
+        <div className="d-flex flex-wrap gap-2">
           {user ? (
-            <Link className="primary-button" to="/dashboard">Open dashboard</Link>
+            <Link className="btn btn-success fw-bold" to="/dashboard">Open dashboard</Link>
           ) : (
             <>
-              <Link className="primary-button" to="/login">Login</Link>
-              <Link className="secondary-button" to="/register">Register</Link>
+              <Link className="btn btn-success fw-bold" to="/login">Login</Link>
+              <Link className="btn btn-outline-dark fw-bold" to="/register">Register</Link>
             </>
           )}
         </div>

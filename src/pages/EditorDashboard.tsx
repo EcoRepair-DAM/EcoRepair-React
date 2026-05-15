@@ -63,14 +63,14 @@ export default function EditorDashboard() {
             <div>
               <p className="eyebrow">Editor tools</p>
               <h3>Manage repair status and inventory quality</h3>
-              <p className="muted-text">Editors can create and edit devices, update repairs and close pending work.</p>
+              <p className="text-secondary">Editors can create and edit devices, update repairs and close pending work.</p>
             </div>
-            <Link className="primary-button" to="/repairs">Manage repairs</Link>
-            <Link className="secondary-button" to="/devices">Manage devices</Link>
+            <Link className="btn btn-success fw-bold" to="/repairs">Manage repairs</Link>
+            <Link className="btn btn-outline-light fw-bold" to="/devices">Manage devices</Link>
           </div>
 
-          <div className="table-wrap">
-            <table>
+          <div className="table-responsive rounded border bg-white shadow-sm">
+            <table className="table table-hover align-middle mb-0">
               <thead>
                 <tr>
                   <th>Pending repair</th>
@@ -102,9 +102,11 @@ export default function EditorDashboard() {
 
 function Summary({ label, value }: { label: string; value: number }) {
   return (
-    <div className="summary-item">
-      <span>{label}</span>
-      <strong>{value}</strong>
+    <div className="card summary-item shadow-sm">
+      <div className="card-body">
+        <span className="text-secondary fw-bold">{label}</span>
+        <strong>{value}</strong>
+      </div>
     </div>
   );
 }

@@ -7,8 +7,8 @@ export default function StatusMessage({
   error?: string;
   empty?: boolean;
 }) {
-  if (loading) return <p className="status-text">Loading data...</p>;
-  if (error) return <p className="error-text">{error}</p>;
-  if (empty) return <p className="status-text">No data found.</p>;
+  if (loading) return <p className="text-secondary fw-semibold">Loading data...</p>;
+  if (error) return <p className="alert alert-danger fw-semibold">{error}</p>;
+  if (empty) return <p className="text-secondary fw-semibold">No data found.</p>;
   return null;
 }

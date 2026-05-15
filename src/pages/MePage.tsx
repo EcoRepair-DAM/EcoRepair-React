@@ -4,7 +4,7 @@ export default function MePage() {
   const { user } = useAuth();
 
   return (
-    <section className="page-card">
+    <section className="card card-body shadow-sm">
       <p className="eyebrow">Session</p>
       <h2>Profile</h2>
       <dl className="detail-list">

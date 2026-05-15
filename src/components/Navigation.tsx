@@ -16,13 +16,15 @@ export default function Navigation() {
         : "/dashboard/user";
 
   return (
-    <nav className="main-nav">
-      <NavLink to={dashboardPath}>Dashboard</NavLink>
-      <NavLink to="/devices">Devices</NavLink>
-      <NavLink to="/repairs">Repairs</NavLink>
-      {user.role === "ADMIN" && <NavLink to="/admin">Users</NavLink>}
-      {user.role === "EDITOR" && <NavLink to="/editor">Editor</NavLink>}
-      <NavLink to="/me">Profile</NavLink>
+    <nav className="main-nav shadow-sm">
+      <div className="container d-flex flex-wrap justify-content-center gap-2 py-2">
+        <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to={dashboardPath}>Dashboard</NavLink>
+        <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to="/devices">Devices</NavLink>
+        <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to="/repairs">Repairs</NavLink>
+        {user.role === "ADMIN" && <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to="/admin">Users</NavLink>}
+        {user.role === "EDITOR" && <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to="/editor">Editor</NavLink>}
+        <NavLink className={({ isActive }) => `nav-pill ${isActive ? "active" : ""}`} to="/me">Profile</NavLink>
+      </div>
     </nav>
   );
 }

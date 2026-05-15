@@ -57,8 +57,8 @@ export default function UsersPage() {
 
       <StatusMessage loading={loading} error={error} />
 
-      <div className="table-wrap">
-        <table>
+      <div className="table-responsive rounded border bg-white shadow-sm">
+        <table className="table table-hover align-middle mb-0">
           <thead>
             <tr>
               <th>ID</th>
@@ -74,6 +74,7 @@ export default function UsersPage() {
                 <td>{user.email}</td>
                 <td>
                   <select
+                    className="form-select"
                     value={user.role}
                     onChange={(event) => changeRole(user.id, event.target.value as AppRole)}
                   >
@@ -83,7 +84,7 @@ export default function UsersPage() {
                   </select>
                 </td>
                 <td>
-                  <button className="danger-button" onClick={() => removeUser(user.id)}>
+                  <button className="btn btn-outline-danger btn-sm fw-bold" onClick={() => removeUser(user.id)}>
                     Delete
                   </button>
                 </td>

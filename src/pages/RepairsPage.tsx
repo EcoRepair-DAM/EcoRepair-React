@@ -128,50 +128,66 @@ export default function RepairsPage() {
       <StatusMessage loading={loading} error={error} />
 
       {canCreate ? (
-        <form className="management-form stacked-form" onSubmit={handleSubmit}>
+        <form className="card card-body shadow-sm mb-4" onSubmit={handleSubmit}>
           <h3>{editingId ? "Edit repair" : "New repair request"}</h3>
-          <label>Description</label>
-          <input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
-          <label>Cost</label>
-          <input type="number" min="0" step="0.01" value={form.cost} onChange={(e) => setForm({ ...form, cost: Number(e.target.value) })} required />
-          <label>Repair date</label>
-          <input type="date" value={form.repairDate} onChange={(e) => setForm({ ...form, repairDate: e.target.value })} required />
-          <label>Device</label>
-          <select value={form.deviceId} onChange={(e) => setForm({ ...form, deviceId: Number(e.target.value) })} required>
-            {devices.map((device) => (
-              <option key={device.id} value={device.id}>{device.name}</option>
-            ))}
-          </select>
+          <div className="row g-3 mt-1">
+            <div className="col-md-6">
+              <label className="form-label fw-bold">Description</label>
+              <input className="form-control" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
+            </div>
+            <div className="col-md-3">
+              <label className="form-label fw-bold">Cost</label>
+              <input className="form-control" type="number" min="0" step="0.01" value={form.cost} onChange={(e) => setForm({ ...form, cost: Number(e.target.value) })} required />
+            </div>
+            <div className="col-md-3">
+              <label className="form-label fw-bold">Repair date</label>
+              <input className="form-control" type="date" value={form.repairDate} onChange={(e) => setForm({ ...form, repairDate: e.target.value })} required />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label fw-bold">Device</label>
+              <select className="form-select" value={form.deviceId} onChange={(e) => setForm({ ...form, deviceId: Number(e.target.value) })} required>
+                {devices.map((device) => (
+                  <option key={device.id} value={device.id}>{device.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           {canManage && (
-            <label className="checkbox-row">
-              <input type="checkbox" checked={form.repair} onChange={(e) => setForm({ ...form, repair: e.target.checked })} />
-              Finished
+            <label className="form-check mt-3">
+              <input className="form-check-input" type="checkbox" checked={form.repair} onChange={(e) => setForm({ ...form, repair: e.target.checked })} />
+              <span className="form-check-label">Finished</span>
             </label>
           )}
-          <div className="button-row">
-            <button className="primary-button" type="submit">Save repair</button>
-            <button className="secondary-button" type="button" onClick={resetForm}>Cancel</button>
+          <div className="d-flex flex-wrap gap-2 mt-3">
+            <button className="btn btn-success fw-bold" type="submit">Save repair</button>
+            <button className="btn btn-outline-dark fw-bold" type="button" onClick={resetForm}>Cancel</button>
           </div>
         </form>
       ) : (
-        <p className="status-text">Your role can view repairs but cannot change them.</p>
+        <p className="text-secondary fw-semibold">Your role can view repairs but cannot change them.</p>
       )}
 
-      <div className="toolbar">
-        <input placeholder="Search by description" value={search} onChange={(e) => setSearch(e.target.value)} />
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="all">All statuses</option>
-          <option value="true">Finished</option>
-          <option value="false">Pending</option>
-        </select>
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      <div className="row g-2 mb-3">
+        <div className="col-md">
+          <input className="form-control" placeholder="Search by description" value={search} onChange={(e) => setSearch(e.target.value)} />
+        </div>
+        <div className="col-md-3">
+          <select className="form-select" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="all">All statuses</option>
+            <option value="true">Finished</option>
+            <option value="false">Pending</option>
+          </select>
+        </div>
+        <div className="col-md-3">
+          <select className="form-select" value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
       </div>
 
-      <div className="table-wrap">
-        <table>
+      <div className="table-responsive rounded border bg-white shadow-sm">
+        <table className="table table-hover align-middle mb-0">
           <thead>
             <tr>
               <th>Description</th>
@@ -189,12 +205,12 @@ export default function RepairsPage() {
                 <td>{repair.cost.toFixed(2)} EUR</td>
                 <td>{repair.repairDate}</td>
                 <td>{getDeviceName(repair.deviceId)}</td>
-                <td><span className={`badge ${repair.repair ? "status-ok" : "status-pending"}`}>{repair.repair ? "Finished" : "Pending"}</span></td>
+                <td><span className={`badge ${repair.repair ? "text-bg-success" : "text-bg-secondary"}`}>{repair.repair ? "Finished" : "Pending"}</span></td>
                 <td>
                   {canManage ? (
-                    <div className="button-row">
-                      <button className="secondary-button" onClick={() => startEdit(repair)}>Edit</button>
-                      <button className="danger-button" onClick={() => removeRepair(repair.id)}>Delete</button>
+                    <div className="d-flex flex-wrap gap-2">
+                      <button className="btn btn-outline-dark btn-sm fw-bold" onClick={() => startEdit(repair)}>Edit</button>
+                      <button className="btn btn-outline-danger btn-sm fw-bold" onClick={() => removeRepair(repair.id)}>Delete</button>
                     </div>
                   ) : "Request sent"}
                 </td>
