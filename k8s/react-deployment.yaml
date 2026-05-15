@@ -20,7 +20,7 @@ spec:
       containers:
         - name: ecorepair-react
           # CAMBIAR LA VERSIÓN EN FUNCION DE LA NECESIDAD!
-          image: a28731nerea/ecorepair-react:v1
+          image: a28731nerea/ecorepair-react:v2
           ports:
             - containerPort: 80
  
