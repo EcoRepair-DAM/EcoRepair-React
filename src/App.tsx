@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import AdminDashboard from "./pages/AdminDashboard";
 import DeviceDetailPage from "./pages/DeviceDetailPage";
+import DeviceFormPage from "./pages/DeviceFormPage";
 import DevicesPage from "./pages/DevicesPage";
 import EditorDashboard from "./pages/EditorDashboard";
 import HomePage from "./pages/HomePage";
@@ -15,6 +16,8 @@ import LoginPage from "./pages/LoginPage";
 import MePage from "./pages/MePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
+import RepairDetailPage from "./pages/RepairDetailPage";
+import RepairFormPage from "./pages/RepairFormPage";
 import RepairsPage from "./pages/RepairsPage";
 import UserDashboard from "./pages/UserDashboard";
 import UsersPage from "./pages/UsersPage";
@@ -98,6 +101,16 @@ export default function App() {
                 }
               />
               <Route
+                path="/devices/new"
+                element={
+                  <RequireAuth>
+                    <RequireRole allowedRoles={["ADMIN", "EDITOR"]}>
+                      <DeviceFormPage />
+                    </RequireRole>
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path="/devices/:id"
                 element={
                   <RequireAuth>
@@ -110,6 +123,24 @@ export default function App() {
                 element={
                   <RequireAuth>
                     <RepairsPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/repairs/new"
+                element={
+                  <RequireAuth>
+                    <RequireRole allowedRoles={["ADMIN", "EDITOR"]}>
+                      <RepairFormPage />
+                    </RequireRole>
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/repairs/:id"
+                element={
+                  <RequireAuth>
+                    <RepairDetailPage />
                   </RequireAuth>
                 }
               />

@@ -5,6 +5,10 @@ export function getRepairs() {
   return apiRequest<Repair[]>("/repairs");
 }
 
+export function getRepair(id: string | number) {
+  return apiRequest<Repair>(`/repairs/${id}`);
+}
+
 export function createRepair(payload: RepairPayload) {
   return apiRequest<Repair>("/repairs", {
     method: "POST",
