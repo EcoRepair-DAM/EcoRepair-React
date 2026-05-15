@@ -5,7 +5,7 @@ import RequireRole from "./auth/RequireRole";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-import AdminDashboard from "./pages/AdminDashboard";
+// import AdminDashboard from "./pages/AdminDashboard";
 import DeviceDetailPage from "./pages/DeviceDetailPage";
 import DevicesPage from "./pages/DevicesPage";
 import EditorDashboard from "./pages/EditorDashboard";
