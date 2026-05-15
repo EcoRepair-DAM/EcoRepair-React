@@ -8,9 +8,16 @@ export default function Navigation() {
     return null;
   }
 
+  const dashboardPath =
+    user.role === "ADMIN"
+      ? "/dashboard/admin"
+      : user.role === "EDITOR"
+        ? "/dashboard/editor"
+        : "/dashboard/user";
+
   return (
     <nav className="main-nav">
-      <NavLink to="/dashboard">Dashboard</NavLink>
+      <NavLink to={dashboardPath}>Dashboard</NavLink>
       <NavLink to="/devices">Devices</NavLink>
       <NavLink to="/repairs">Repairs</NavLink>
       {user.role === "ADMIN" && <NavLink to="/admin">Users</NavLink>}
