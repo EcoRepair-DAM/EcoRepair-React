@@ -93,4 +93,4 @@ El proyecto incluye un pipeline de GitHub Actions (`.github/workflows/deploy-fro
 
 ---
 
-Proyecto escolar — Curso 2025–2026
+Proyecto escolar — Curso 2025–2026 
