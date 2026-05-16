@@ -70,7 +70,7 @@ export default function UserDashboard() {
               <p className="text-secondary">User accounts can read the inventory and send repair requests for registered devices.</p>
             </div>
             <Link className="btn btn-success fw-bold" to="/devices">View devices</Link>
-            <Link className="btn btn-outline-light fw-bold" to="/repairs">Request repair</Link>
+            <Link className="btn btn-outline-light fw-bold" to="/repairs">View repairs</Link>
           </div>
 
           <div className="dashboard-columns">
